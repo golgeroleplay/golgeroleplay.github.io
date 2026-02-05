@@ -97,13 +97,24 @@ function revealOnScroll() {
 window.addEventListener("scroll", revealOnScroll);
 revealOnScroll(); // Sayfa açılınca bir kere çalıştır
 
-/* --- Sağ Tık ve İncele Yasağı --- */
+// Sağ tık menüsünü kapat
 document.addEventListener('contextmenu', event => event.preventDefault());
 
+// F12, Ctrl+U (Kaynak Kodu), Ctrl+Shift+I (İncele) tuşlarını engelle
 document.onkeydown = function(e) {
-    if(e.keyCode == 123) { return false; } // F12
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; } // Ctrl+Shift+I
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; } // Ctrl+Shift+C
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; } // Ctrl+Shift+J
-    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; } // Ctrl+U
+    if(event.keyCode == 123) { // F12
+        return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { // Ctrl+Shift+I
+        return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { // Ctrl+Shift+C
+        return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { // Ctrl+Shift+J
+        return false;
+    }
+    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { // Ctrl+U
+        return false;
+    }
 }
