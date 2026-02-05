@@ -1,29 +1,51 @@
-/* -----------------------------------------------
-   1. BÖLÜM: GÜVENLİK (SAĞ TIK VE F12 ENGELLEME)
-   Hata riskine karşı en başta çalıştırıyoruz.
------------------------------------------------ */
+/* -------------------------------------------------------
+   GÜVENLİK DUVARI (SAĞ TIK VE TUŞLAR)
+------------------------------------------------------- */
+
+// 1. Sağ Tık Menüsünü Komple Öldür
 document.addEventListener('contextmenu', function(event) {
-    event.preventDefault();
+    event.preventDefault(); // Menünün açılmasını engelle
+    return false;
 });
 
-document.onkeydown = function(e) {
-    // F12
-    if(e.keyCode == 123) { return false; }
-    // Ctrl+Shift+I (İncele)
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
-    // Ctrl+Shift+C (Element Seç)
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; }
-    // Ctrl+Shift+J (Konsol)
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; }
-    // Ctrl+U (Kaynak Kodu)
-    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; }
-};
+// 2. Yasaklı Tuşları (F12, CTRL+U vs.) Engelle
+document.addEventListener('keydown', function(event) {
+    
+    // F12 Tuşu
+    if (event.key === 'F12' || event.keyCode === 123) {
+        event.preventDefault();
+        return false;
+    }
 
-/* -----------------------------------------------
-   2. BÖLÜM: KAYDIRMA ANİMASYONU (REVEAL)
------------------------------------------------ */
+    // CTRL + U (Kaynak Kodunu Gör)
+    if (event.ctrlKey && (event.key === 'u' || event.key === 'U' || event.keyCode === 85)) {
+        event.preventDefault();
+        return false;
+    }
+
+    // CTRL + SHIFT + I (İncele)
+    if (event.ctrlKey && event.shiftKey && (event.key === 'i' || event.key === 'I' || event.keyCode === 73)) {
+        event.preventDefault();
+        return false;
+    }
+
+    // CTRL + SHIFT + C (Öğe Seç)
+    if (event.ctrlKey && event.shiftKey && (event.key === 'c' || event.key === 'C' || event.keyCode === 67)) {
+        event.preventDefault();
+        return false;
+    }
+
+    // CTRL + SHIFT + J (Konsol)
+    if (event.ctrlKey && event.shiftKey && (event.key === 'j' || event.key === 'J' || event.keyCode === 74)) {
+        event.preventDefault();
+        return false;
+    }
+});
+
+/* -------------------------------------------------------
+   KAYDIRMA ANİMASYONU (REVEAL)
+------------------------------------------------------- */
 function revealOnScroll() {
-    // "section" etiketlerini veya "reveal" sınıfı olanları bul
     var reveals = document.querySelectorAll("section, .reveal");
 
     for (var i = 0; i < reveals.length; i++) {
@@ -33,7 +55,6 @@ function revealOnScroll() {
 
         if (elementTop < windowHeight - elementVisible) {
             reveals[i].classList.add("active");
-            reveals[i].classList.add("reveal"); // CSS için gerekliyse
         } else {
             reveals[i].classList.remove("active");
         }
@@ -41,5 +62,4 @@ function revealOnScroll() {
 }
 
 window.addEventListener("scroll", revealOnScroll);
-// Sayfa yüklenince animasyonu tetikle
 revealOnScroll();
