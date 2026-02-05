@@ -98,9 +98,10 @@ window.addEventListener("scroll", revealOnScroll);
 // Sayfa açıldığında da bir kere kontrol et
 
 revealOnScroll();
-/* --- Sağ Tık ve İncele Yasağı --- */
+// Sağ tık menüsünü kapat
 document.addEventListener('contextmenu', event => event.preventDefault());
 
+// F12, Ctrl+U (Kaynak Kodu), Ctrl+Shift+I (İncele) tuşlarını engelle
 document.onkeydown = function(e) {
     if(event.keyCode == 123) { // F12
         return false;
